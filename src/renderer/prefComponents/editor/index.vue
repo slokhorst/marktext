@@ -79,6 +79,12 @@
       :bool="autoGuessEncoding"
       :onChange="value => onSelectChange('autoGuessEncoding', value)"
     ></bool>
+    <cur-select
+      description="Whether a single trailing newline should be ensured or trailing newlines should be removed."
+      :value="trimTrailingNewline"
+      :options="trimTrailingNewlineOptions"
+      :onChange="value => onSelectChange('trimTrailingNewline', value)"
+    ></cur-select>
     <separator></separator>
     <cur-select
       description="The writing text direction."
@@ -118,6 +124,7 @@ import TextBox from '../common/textBox'
 import {
   endOfLineOptions,
   textDirectionOptions,
+  trimTrailingNewlineOptions,
   getDefaultEncodingOptions
 } from './config'
 
@@ -133,6 +140,7 @@ export default {
   data () {
     this.endOfLineOptions = endOfLineOptions
     this.textDirectionOptions = textDirectionOptions
+    this.trimTrailingNewlineOptions = trimTrailingNewlineOptions
     this.defaultEncodingOptions = getDefaultEncodingOptions()
     return {}
   },
@@ -153,7 +161,8 @@ export default {
       hideLinkPopup: state => state.preferences.hideLinkPopup,
       editorLineWidth: state => state.preferences.editorLineWidth,
       defaultEncoding: state => state.preferences.defaultEncoding,
-      autoGuessEncoding: state => state.preferences.autoGuessEncoding
+      autoGuessEncoding: state => state.preferences.autoGuessEncoding,
+      trimTrailingNewline: state => state.preferences.trimTrailingNewline
     })
   },
   methods: {
